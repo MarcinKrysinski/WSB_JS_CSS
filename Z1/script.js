@@ -82,20 +82,82 @@ function validateNumber(number) {
 }
 
 function validateRadio(radio) {
-    // todo
+    const radios = document.getElementsByName("favouriteNumber");
+    let valid = false;
 
-    return true;
+    let i = 0;
+
+    for (i; i < radios.length; i++) {
+        if (radios[i].checked) valid = true;
+    }
+
+    if (!valid) alert("Must check some radio!");
+    return valid;
 }
 
 function validatePassword(password) {
     // regex do hasła: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
-    // todo
+    const valid = /^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$/.test(password);
 
-    return true;
+    const input = document.querySelector("input[name='password']");
+
+    if (valid) {
+        input.className = "";
+
+        const nameMessage = document.getElementById("password-input-message");
+        if (nameMessage) {
+            nameMessage.parentElement.removeChild(nameMessage);
+        }
+    } else {
+
+        input.className = "invalid";
+
+        if (!document.getElementById("password-input-message")) {
+            const small = document.createElement("small");
+            small.id = "password-input-message"; // nadajemy id - potem dzięki niemu dostaniemy się do elementu, żeby go usunąć
+            small.className = "invalid"; // nadajemy klasę - żeby był czerwony
+            small.innerText = "Niepoprawne hasło"; // dodajemy tekst, który wyświetli się użytkownikowi
+
+            input.parentElement.appendChild(small);
+        }
+    }
+
+    return valid;
 }
 
 function validateRepeatedPassword(password, repeatedPassword) {
-    // todo
 
-    return true;
+    let valid = false;
+
+    if (password === repeatedPassword) {
+        valid = true;
+    }
+
+    const input = document.querySelector("input[name='password2']");
+
+    if (password === repeatedPassword) {
+
+        input.className = "";
+
+        const nameMessage = document.getElementById("password2-input-message");
+        if (nameMessage) {
+            //jeśli wyświetla się komunikat - usuwamy go
+            nameMessage.parentElement.removeChild(nameMessage);
+        }
+    } else {
+
+        input.className = "invalid";
+
+        if (!document.getElementById("password2-input-message")) {
+            // tworzymy element, który będzie mówił o błędzie w wybranym polu
+            const small = document.createElement("small");
+            small.id = "password2-input-message"; // nadajemy id - potem dzięki niemu dostaniemy się do elementu, żeby go usunąć
+            small.className = "invalid"; // nadajemy klasę - żeby był czerwony
+            small.innerText = "Hasła nie są identyczne"; // dodajemy tekst, który wyświetli się użytkownikowi
+
+            input.parentElement.appendChild(small);
+        }
+    }
+
+    return valid;
 }
