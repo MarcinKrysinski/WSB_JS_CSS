@@ -3,8 +3,10 @@
 }
 
 .container {
-    margin: auto;
-    width: 80%
+    margin: 5px;
+    width: 80%;
+    min-width:450px;
+
 }
 
 .row {
@@ -24,6 +26,8 @@
 
 .column.half-column {
     width: 50%;
+    min-width:450px;
+    padding: 0;
 }
 
 .column.label-column {
@@ -77,4 +81,20 @@ h3 {
 input.invalid {
     border-color: red;
     color: black;
+}
+
+/*#form-coulumn{*/
+/*    min-width:450px;*/
+/*}*/
+
+@media all and (max-width:480px) {
+    #form-coulumn, #db-coulumn {
+        float:none;
+        width:auto;
+        margin:15px;
+    }
+
+    #lewy p, #prawy p {
+        border:1px solid gold;
+    }
 }
